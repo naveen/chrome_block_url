@@ -1,0 +1,18 @@
+{
+  "name": "Tootlik",
+  "version": "1.0",
+  "description": "Tootlik allows you to be more productive by temporarily disabling distracting websites.",
+  "permissions": [
+  	"webRequest",
+  	"webRequestBlocking",
+  	"<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+    	"/src/on_before_request.js"
+    ]
+  },
+  "options_page": "/index.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}
