@@ -11,8 +11,18 @@ Url.Model = Backbone.Model.extend({
     },
 
     "is_valid": function() {
-    	var name = this.attributes.name;
-    	if(!this.regex.test(name)) { return false; }
+    	if(!this.regex.test(this.attributes.name)) {
+    		return false;
+    	}
+
+    	// get simplified url
+    		// remove http:// and https://
+    		// remove www.
+    		// remove everything after .com, .ie ...
+
+    	// can the new name be found in the collection
+    		// return false
+
     	return true;
     }
 });
