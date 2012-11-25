@@ -1,7 +1,12 @@
 var callback = function (request) {
+	// time related blocking
+		// has time run out
+			// return redirect('#timeout/' + request.url);
 	try {
 		var collection = JSON.parse(localStorage['urls']);
 		for(var i in collection) {
+			// url += ^https://www. + database value
+
 			var regex = new RegExp(collection[i].name, "i");
 
 			if(request

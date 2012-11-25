@@ -1,6 +1,6 @@
 jQuery(function($) {
-	Url = new tootlik.module('url');
-	new Url.Router();
+	Index = new tootlik.module('index');
+	new Index.Router();
 
 	Backbone.history.start();
 });
