@@ -32,7 +32,7 @@ Url.Collection = Backbone.Collection.extend({
 		this.load();
 
 		this.bind("add", this.push);
-		this.bind("remove", this.pull);
+		this.bind("remove", this.save);
 	},
 
 	"push": function(url_object) {
