@@ -2,7 +2,7 @@
 
 Url.Model = Backbone.Model.extend({
 	//"regex": new RegExp("((http|https)(:\/\/))?(www\.)?([a-z0-9]+[.]{1})+([a-z]{2, 4})", "i"),
-	"regex": new RegExp("^(http(s)?:\/\/)?(www\.)?([a-z0-9]+[.])+([a-z]){2,4}\/?$", "i"),
+	"valid_url": new RegExp("^(http(s)?:\/\/)?(www\.)?([a-z0-9]+[.])+([a-z]){2,4}", "i"),
 
     "defaults": {
         "id": null,
@@ -10,20 +10,18 @@ Url.Model = Backbone.Model.extend({
         "created_at": null
     },
 
+	"set_name": function(name) {
+		if(!this.valid_url.test(name)) { return false; }
+
+		name = name.replace(/^(http(s)?:\/\/)?/i, "");
+		name = name.replace(/^(www\.)?/i, "");
+		name = name.replace(/\/.*/i, "");
+
+		this.attributes.name = name;
+	},
+
     "is_valid": function() {
-    	if(!this.regex.test(this.attributes.name)) {
-    		return false;
-    	}
-
-    	// get simplified url
-    		// remove http:// and https://
-    		// remove www.
-    		// remove everything after .com, .ie ...
-
-    	// can the new name be found in the collection
-    		// return false
-
-    	return true;
+    	return this.valid_url.test(this.attributes.name);
     }
 });
 
@@ -34,7 +32,7 @@ Url.Collection = Backbone.Collection.extend({
 		this.load();
 
 		this.bind("add", this.push);
-		this.bind("remove", this.save);
+		this.bind("remove", this.pull);
 	},
 
 	"push": function(url_object) {
@@ -47,7 +45,7 @@ Url.Collection = Backbone.Collection.extend({
 
 	"load": function() {
 		try {
-			var collection = JSON.parse(localStorage['urls']);
+			var collection = JSON.parse(localStorage["urls"]);
 			for(var i in collection) {
 				this.add(collection[i]);
 			}
@@ -56,7 +54,7 @@ Url.Collection = Backbone.Collection.extend({
 
 	"save": function() {
 		var json = this.toJSON();
-		localStorage['urls'] = JSON.stringify(json);
+		localStorage["urls"] = JSON.stringify(json);
 	}
 });
 
@@ -93,16 +91,15 @@ Url.ListView = Backbone.View.extend({
 	"on_submit": function(e) {
 		e.preventDefault();
 
-		var url_text = document.getElementById('url_text').value;
-		var url_object = new Url.Model({
-			"name": url_text,
-			"created_at": (new Date()).toDateString()
-		});
+		var url_object = new Url.Model({"created_at": (new Date()).toDateString()});
+		url_object.set_name(document.getElementById("url_text").value);
 
-		this.model.add(url_object);
+		if(url_object.is_valid()) {
+			this.model.add(url_object);
 
-		document.getElementById('url_text').value = "";
-		this.render();
+			document.getElementById("url_text").value = "";
+			this.render();
+		}
 	},
 
 	"on_delete": function(e) {
@@ -117,7 +114,7 @@ Url.ListView = Backbone.View.extend({
 });
 
 Url.ListItemView = Backbone.View.extend({
-    "template": _.template(document.getElementById('template_url_list_item').innerHTML),
+    "template": _.template(document.getElementById("template_url_list_item").innerHTML),
 
     "render": function() {
         $(this.el).html(this.template(this.model));
@@ -134,4 +131,4 @@ Url.Router = Backbone.Router.extend({
     }
 });
 
-})(tootlik, tootlik.module('url'));
+})(tootlik, tootlik.module("url"));
