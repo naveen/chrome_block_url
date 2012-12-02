@@ -1,17 +1,16 @@
 var callback = function (request) {
+	var url_prefix = "^(http(s)?:\/\/)?(www\.)?";
 	// time related blocking
 		// has time run out
 			// return redirect('#timeout/' + request.url);
 	try {
 		var collection = JSON.parse(localStorage['urls']);
 		for(var i in collection) {
-			// url += ^https://www. + database value
-
-			var regex = new RegExp(collection[i].name, "i");
+			var url_regex = new RegExp(url_prefix + collection[i].name, "i");
 
 			if(request
 			&& request.url
-			&& regex.test(request.url)) {
+			&& url_regex.test(request.url)) {
 				return redirect('#request/' + request.url);
 			}
 		}
