@@ -57,7 +57,7 @@ h1 {
 	float:left;
 }
 
-#container #url_form {
+#container #options_url_form {
 	float:right;
 	margin-top:1px;
 }
@@ -66,15 +66,15 @@ h1 {
 	margin:10px 15px 0;
 }
 
-#container .url_item {
+#container .options_url_item {
 	padding:9px 0 8px;
 }
 
-#container .url_item a {
+#container .options_url_item a {
 	float:right;
 }
 
-#container .url_item img {
+#container .options_url_item .favicon {
 	vertical-align:text-top;
 	width:16px;
 	height:16px;

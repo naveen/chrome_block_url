@@ -25,23 +25,23 @@
 	</div>
 
 	<div id="container">
-		<div id="url">
+		<div id="options_url_index">
 			<div id="header">
 				<h1>Blocked Urls</h1>
-				<div id="url_form">
-					<input id="url_text" type="text" />
-					<input id="url_submit" type="submit" value="Block website" />
+				<div id="options_url_form">
+					<input id="options_url_text" type="text" />
+					<input id="options_url_submit" type="submit" value="Block website" />
 				</div>
 				<div class="clearfix"></div>
 			</div>
 
-			<ul id="url_list">
+			<ul id="options_url_list">
 			</ul>
 		</div>
 	</div>
 
-	<script id="template_url_list_item" type="text/template">
-		<li class="url_item">
+	<script id="template_options_url_show" type="text/template">
+		<li class="options_url_item">
 			<img src="http://<%= attributes.name %>/favicon.ico" class="favicon" />
 			<span class="name"><%= attributes.name %></span>
 			<a href="#" class="delete" data-cid="<%= cid %>">remove</a>
@@ -51,10 +51,14 @@
 	<script src="/assets/js/libs/jquery-1.8.2.js"></script>
 	<script src="/assets/js/libs/underscore-1.4.2.js"></script>
 	<script src="/assets/js/libs/backbone-0.9.2.js"></script>
+	<script src="/src/app.js"></script>
 
-	<script src="/src/application.js"></script>
-	<script src="/src/options.js"></script>
+	<script src="/src/models/url.js"></script>
+	<script src="/src/collections/url.js"></script>
 
-	<script src="/src/modules/url.js"></script>
+	<script src="/src/views/options/url_index.js"></script>
+	<script src="/src/views/options/url_show.js"></script>
+
+	<script src="/src/controllers/options.js"></script>
 </body>
 </html>
