@@ -1,8 +1,6 @@
 var callback = function (request) {
 	var url_prefix = "^(http(s)?:\/\/)?(www\.)?";
-	// time related blocking
-		// has time run out
-			// return redirect('#timeout/' + request.url);
+
 	try {
 		var collection = JSON.parse(localStorage['urls']);
 		for(var i in collection) {
@@ -31,5 +29,4 @@ var redirect = function(arg) {
 	return {'redirectUrl': page + arg};
 }
 
-chrome.webRequest.onBeforeRequest.addListener(
-	callback, filter, opt_extraInfoSpec);
+chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec);

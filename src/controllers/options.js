@@ -1,6 +1,6 @@
 (function($) {
-	Page = new App.module("options");
-	Router = Backbone.Router.extend({
+	var Page = new App.module("options");
+	var Router = Backbone.Router.extend({
 		"routes": { "": "index" },
 		"index": function() {
 			var collection = new Page.Collections.Url();

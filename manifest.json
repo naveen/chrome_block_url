@@ -9,7 +9,7 @@
   ],
   "background": {
     "scripts": [
-    	"/src/controllers/on_before_request.js"
+    	"/src/controllers/event.js"
     ]
   },
   "options_page": "/options.html",
