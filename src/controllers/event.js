@@ -9,7 +9,7 @@ var callback = function (request) {
 			if(request
 			&& request.url
 			&& url_regex.test(request.url)) {
-				return redirect('#request/' + request.url);
+				return redirect('#/requested/' + request.url);
 			}
 		}
 	} catch(err) { }
