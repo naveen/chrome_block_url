@@ -1,7 +1,6 @@
 (function(App, Page) {
 
 Page.Models.Url = Backbone.Model.extend({
-	//"regex": new RegExp("((http|https)(:\/\/))?(www\.)?([a-z0-9]+[.]{1})+([a-z]{2, 4})", "i"),
 	"valid_url": new RegExp("^(http(s)?:\/\/)?(www\.)?([a-z0-9]+[.])+([a-z]){2,4}", "i"),
 
     "defaults": {
